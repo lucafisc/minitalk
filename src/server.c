@@ -1,5 +1,10 @@
 #include "../includes/minitalk.h"
 
+void get_msg(int i)
+{
+
+}
+
 int	main(int argc, char *argv[])
 {
 	int pid;
@@ -12,5 +17,12 @@ int	main(int argc, char *argv[])
 	}
 	pid = getpid();
 	print_pid(pid);
+
+	while (1)
+	{
+		signal(SIGUSR2, get_msg);
+		signal(SIGUSR1, get_msg);
+		pause();
+	}
 	return 0;
 }
