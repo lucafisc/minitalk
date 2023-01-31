@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lde-ross <lde-ross@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:59:58 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/01/30 22:39:12 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/01/31 18:30:56 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ typedef enum s_bool
 	true
 }	t_bool;
 
+typedef struct s_status {
+	t_bool	has_pid;
+	int	client_pid;
+}	t_status;
+
+extern t_status status;
+
 void print_pid(int pid);
+int *int_to_binary(int n);
+int binary_to_int(int binary_num[]);
 
 #endif

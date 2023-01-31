@@ -1,5 +1,5 @@
 F_SERVER = ./src/server.c ./src/utils.c
-F_CLIENT = ./src/client.c
+F_CLIENT = ./src/client.c ./src/utils.c
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 SERVER = server

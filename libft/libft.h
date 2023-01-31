@@ -69,5 +69,6 @@ int			ft_is_sign(char x);
 t_list		*ft_lstnew_int(int content);
 long int	ft_atoli(const char *str);
 int			ft_is_space(char x);
+int		ft_power(int nb, int power);
 
 #endif
