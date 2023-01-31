@@ -1,5 +1,15 @@
 #include "../includes/minitalk.h"
 
+void	client_handler(int signal)
+{
+	if (signal == SIGUSR1)
+	{
+		ft_printf("Server received message!\n");
+	}
+	else
+		ft_printf("Something bad happened\n");
+}	
+
 void send_msg(int pid, char c)
 {
 	int x;
@@ -15,22 +25,31 @@ void send_msg(int pid, char c)
 	}
 }
 
-
 void	send_pid(int pid)
 {
 	int	*binary;
-	int	p;
-	ft_printf("PID: %d\n", pid);
-	binary = int_to_binary(pid);
-	p = binary_to_int(binary);
-	ft_printf("Converted back: %d", p);
-	ft_printf("\n");
+	int	i;
+
+	i = 0;
+	binary = int_to_binary(getpid());
+	while (i < 32)
+	{
+		if (binary[i] == 1)
+			kill(pid, SIGUSR1);
+		else
+			kill(pid, SIGUSR2);
+		usleep(500);
+		i++;
+	}
 }
 
 int	main(int argc, char *argv[])
 {
 	int i;
 	int pid;
+	struct sigaction	act;
+
+	act.sa_handler = &client_handler;
 
 	if (argc != 3)
 	{
@@ -39,11 +58,19 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	i = 0;
-	send_pid(getpid());
 	pid = ft_atoi(argv[1]);
+	ft_printf("Client PID: %d\n", getpid());
+	ft_printf("Server PID: %d\n", pid);
+	send_pid(pid);
+	sigaction(SIGUSR2, &act, NULL);
+	sigaction(SIGUSR1, &act, NULL);
 	while (argv[2][i])
 	{
 		send_msg(pid, argv[2][i]);
 		i++;
+	}
+	while (1)
+	{
+		pause();
 	}
 }

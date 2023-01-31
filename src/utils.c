@@ -1,11 +1,5 @@
 #include "../includes/minitalk.h"
 
-void	init_status(t_status stat)
-{
-	stat.has_pid = false;
-	stat.client_pid = NULL;
-}
-
 int binary_to_int(int binary[])
 {
     int n = 0;

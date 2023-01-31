@@ -2,15 +2,7 @@
 
 t_status status;
 
-void	handler(int signal)
-{
-	if (!status.has_pid)
-		get_pid(signal);
-	else
-		get_msg(signal);
-}
-
-void get_msg(int signal)
+void	get_msg(int signal)
 {
 	static int	bit;
 	static int	i;
@@ -23,13 +15,47 @@ void get_msg(int signal)
 		ft_printf("%c", i);
 		bit = 0;
 		i = 0;
+		kill(status.client_pid, SIGUSR1);
 	}
+}
+
+void	get_pid(int signal)
+{
+	static int array[32];
+	static int i;
+
+	if (i < 32)
+	{
+		if (signal == SIGUSR1)
+			array[i] = 1;
+		else
+			array[i] = 0;
+		i++;
+	}
+	if (i == 32)
+	{
+		status.client_pid = binary_to_int(array);
+		status.has_pid = true;
+		ft_printf("%d", status.client_pid);
+	}
+}
+
+void	handler(int signal)
+{
+	if (!status.has_pid)
+	{
+		get_pid(signal);
+	}
+	else
+		get_msg(signal);
 }
 
 int	main(int argc, char *argv[])
 {
 	struct sigaction	act;
-	init_status(status);
+
+	status.has_pid = false;
+	status.client_pid = 0;
 	ft_bzero(&act, sizeof(act));
 	act.sa_handler = &handler;
 
