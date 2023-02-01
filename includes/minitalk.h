@@ -6,12 +6,12 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:59:58 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/01/31 19:46:51 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/01 17:40:40 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINITALK_H
-#define MINITALK_H
+# define MINITALK_H
 # include "../libft/libft.h"
 # include "../ft_printf/ft_printf.h"
 # include <unistd.h>
@@ -28,14 +28,16 @@ typedef enum s_bool
 }	t_bool;
 
 typedef struct s_status {
-	t_bool	has_pid;
-	int	client_pid;
+	t_bool	pid_received;
+	int		client_pid;
 }	t_status;
 
-extern t_status status;
+extern t_status	g_status;
 
-void print_pid(int pid);
-int *int_to_binary(int n);
-int binary_to_int(int binary_num[]);
+void	init_status(t_status *stat);
+void	print_pid(int pid);
+t_bool	is_end_of_msg(int i);
+void	init_act(struct sigaction *act, void (*handler)(int));
+
 
 #endif

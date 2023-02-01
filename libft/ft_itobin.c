@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_itobin.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/29 15:28:10 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/01/29 15:51:10 by lde-ross         ###   ########.fr       */
+/*   Created: 2023/02/01 17:25:28 by lde-ross          #+#    #+#             */
+/*   Updated: 2023/02/01 17:27:08 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <signal.h>
+#include "libft.h"
 
-void	handler(int num)
+int	*ft_itobin(int n)
 {
-	write(STDOUT_FILENO, "Hello\n", 6);
-}
+	int	*binary;
+	int	i;
 
-int	main(int argc, char* argv[])
-{
-	signal(SIGINT, handler);
-	signal(SIGTERM, handler);
-	while (1)
+	i = 0;
+	binary = ft_calloc(32, sizeof(int));
+	ft_memset(binary, 0, sizeof(binary));
+	while (n > 0)
 	{
-		printf("my process id: %d\n", getpid());
-		sleep(1);
+		binary[i] = n % 2;
+		n = n / 2;
+		i++;
 	}
-	
+	return (binary);
 }

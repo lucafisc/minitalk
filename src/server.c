@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/01 16:17:34 by lde-ross          #+#    #+#             */
+/*   Updated: 2023/02/01 17:51:42 by lde-ross         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minitalk.h"
 
-t_status status;
+t_status	g_status;
 
 void	get_msg(int signal)
 {
@@ -8,21 +20,26 @@ void	get_msg(int signal)
 	static int	i;
 
 	if (signal == SIGUSR1)
-		i |= (00000001<< bit);
+		i |= (00000001 << bit);
 	bit++;
 	if (bit == 8)
 	{
-		ft_printf("%c", i);
+		if (is_end_of_msg(i))
+		{
+			kill(g_status.client_pid, SIGUSR1);
+			init_status(&g_status);
+		}
+		else
+			ft_printf("%c", i);
 		bit = 0;
 		i = 0;
-		kill(status.client_pid, SIGUSR1);
 	}
 }
 
 void	get_pid(int signal)
 {
-	static int array[32];
-	static int i;
+	static int	array[32];
+	static int	i;
 
 	if (i < 32)
 	{
@@ -34,18 +51,16 @@ void	get_pid(int signal)
 	}
 	if (i == 32)
 	{
-		status.client_pid = binary_to_int(array);
-		status.has_pid = true;
-		ft_printf("%d", status.client_pid);
+		g_status.client_pid = ft_bintoi(array);
+		g_status.pid_received = true;
+		i = 0;
 	}
 }
 
 void	handler(int signal)
 {
-	if (!status.has_pid)
-	{
+	if (!g_status.pid_received)
 		get_pid(signal);
-	}
 	else
 		get_msg(signal);
 }
@@ -54,17 +69,14 @@ int	main(int argc, char *argv[])
 {
 	struct sigaction	act;
 
-	status.has_pid = false;
-	status.client_pid = 0;
-	ft_bzero(&act, sizeof(act));
-	act.sa_handler = &handler;
-
 	if (argc != 1)
 	{
-		ft_printf(BRED "Error\n" COLOR_RESET);
-		ft_printf(BYEL "Try $>%s\n", argv[0], COLOR_RESET);
+		ft_printf(BRED " ✖ Error\n" COLOR_RESET);
+		ft_printf(BYEL " 💡 Try $>%s\n", argv[0], COLOR_RESET);
 		return (1);
 	}
+	init_status(&g_status);
+	init_act(&act, &handler);
 	print_pid(getpid());
 	while (1)
 	{
@@ -72,5 +84,5 @@ int	main(int argc, char *argv[])
 		sigaction(SIGUSR1, &act, NULL);
 		pause();
 	}
-	return 0;
+	return (0);
 }

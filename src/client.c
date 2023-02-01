@@ -1,18 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/01 16:19:23 by lde-ross          #+#    #+#             */
+/*   Updated: 2023/02/01 17:37:07 by lde-ross         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minitalk.h"
 
-void	client_handler(int signal)
+void	send_msg(int pid, char c)
 {
-	if (signal == SIGUSR1)
-	{
-		ft_printf("Server received message!\n");
-	}
-	else
-		ft_printf("Something bad happened\n");
-}	
+	int	x;
 
-void send_msg(int pid, char c)
-{
-	int x;
 	x = 1;
 	while (x <= 128)
 	{
@@ -20,7 +23,7 @@ void send_msg(int pid, char c)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
-		usleep(500);
+		usleep(100);
 		x = x << 1;
 	}
 }
@@ -31,46 +34,51 @@ void	send_pid(int pid)
 	int	i;
 
 	i = 0;
-	binary = int_to_binary(getpid());
+	binary = ft_itobin(getpid());
 	while (i < 32)
 	{
 		if (binary[i] == 1)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
-		usleep(500);
+		usleep(100);
 		i++;
 	}
+	free(binary);
 }
+
+void	client_handler(int signal)
+{
+	if (signal == SIGUSR1)
+	{
+		ft_printf(BHGRN" ✔ Server received message!\n"COLOR_RESET);
+	}
+	else
+		ft_printf("Something bad happened\n");
+}	
 
 int	main(int argc, char *argv[])
 {
-	int i;
-	int pid;
+	int					i;
+	int					pid;
 	struct sigaction	act;
-
-	act.sa_handler = &client_handler;
 
 	if (argc != 3)
 	{
-		ft_printf(BRED "Invalid arguments\n" COLOR_RESET);
-		ft_printf(BYEL "Try &>%s <PID> <\"message\">\n", argv[0], COLOR_RESET);
+		ft_printf(BRED " ✖ Invalid arguments\n" COLOR_RESET);
+		ft_printf(BYEL " 💡 Try &>%s <PID> <\"message\">\n", argv[0], COLOR_RESET);
 		return (1);
 	}
-	i = 0;
-	pid = ft_atoi(argv[1]);
-	ft_printf("Client PID: %d\n", getpid());
-	ft_printf("Server PID: %d\n", pid);
-	send_pid(pid);
+	init_act(&act, &client_handler);
 	sigaction(SIGUSR2, &act, NULL);
 	sigaction(SIGUSR1, &act, NULL);
+	pid = ft_atoi(argv[1]);
+	send_pid(pid);
+	i = 0;
 	while (argv[2][i])
 	{
 		send_msg(pid, argv[2][i]);
 		i++;
 	}
-	while (1)
-	{
-		pause();
-	}
+	send_msg(pid, 255);
 }

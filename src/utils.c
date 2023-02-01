@@ -1,35 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/01 16:16:35 by lde-ross          #+#    #+#             */
+/*   Updated: 2023/02/01 17:40:09 by lde-ross         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minitalk.h"
 
-int binary_to_int(int binary[])
+void	init_status(t_status *stat)
 {
-    int n = 0;
-    int i = 0;
-    int power = 1;
-    while (i < 32)
-    {
-        n += binary[i] * power;
-        power *= 2;
-        i++;
-    }
-    return n;
+	(*stat).client_pid = 0;
+	(*stat).pid_received = false;
 }
 
-int *int_to_binary(int n)
+void	init_act(struct sigaction *act, void (*handler)(int))
 {
-	int *binary;
-	int i = 0;
-	binary = ft_calloc(32, sizeof(int));
-	ft_memset(binary, 0, sizeof(binary));
-	while (n > 0)
-	{
-		binary[i] = n % 2;
-		n = n / 2;
-		i++;
-	}
-	return (binary);
+	(*act).sa_handler = handler;
+	sigemptyset(&act->sa_mask);
+	(*act).sa_flags = 0;
 }
 
-void print_pid(int pid)
+t_bool	is_end_of_msg(int i)
+{
+	if (i == 255)
+		return (true);
+	else
+		return (false);
+}
+
+
+void	print_pid(int pid)
 {
 	ft_printf(BMAG "\n            _       _   _        _ _    \n" COLOR_RESET);
 	ft_printf(BMAG "           (_)     (_) | |      | | |   \n" COLOR_RESET);
