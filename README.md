@@ -1,4 +1,3 @@
-# minitalk
 <h1 align="center">minitalk</h1>
 
 <p align="center">
