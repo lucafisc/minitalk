@@ -13,7 +13,38 @@ External functions: [`write`](https://man7.org/linux/man-pages/man2/write.2.html
 - [How it works](#how-it-works)
 - [Hot to use](#how-to-use)
 
-## How it works
-
 ## How to use
 
+Clone the minitalk repository to your local machine:
+
+```
+git clone https://github.com/<username>/minitalk.git
+```
+
+Navigate to the minitalk directory:
+
+```
+cd minitalk
+```
+
+Compile the code to generate the executables (server and client):
+
+```
+make
+```
+
+Start the server by running the following command in your terminal:
+
+```
+./server
+```
+
+The server will display its PID (process ID) in the terminal. Take note of this PID as you will need it later.
+
+Start the client by running the following command in a separate terminal window:
+
+```
+./client <SERVER PID> "YOUR MESSAGE HERE"
+```
+
+The server will display the message sent by the client. The client will receive a confirmation that the message has been successfully sent to the server.
