@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:19:23 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/01 17:37:07 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/01 17:56:50 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	client_handler(int signal)
 		ft_printf(BHGRN" ✔ Server received message!\n"COLOR_RESET);
 	}
 	else
-		ft_printf("Something bad happened\n");
+		ft_printf(BHRED"Something bad happened\n"COLOR_RESET);
 }	
 
 int	main(int argc, char *argv[])

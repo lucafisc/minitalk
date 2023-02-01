@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:16:35 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/01 17:40:09 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/01 17:57:21 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ t_bool	is_end_of_msg(int i)
 	else
 		return (false);
 }
-
 
 void	print_pid(int pid)
 {

@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:59:58 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/01 17:40:40 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/01 17:57:58 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,5 @@ void	init_status(t_status *stat);
 void	print_pid(int pid);
 t_bool	is_end_of_msg(int i);
 void	init_act(struct sigaction *act, void (*handler)(int));
-
 
 #endif
