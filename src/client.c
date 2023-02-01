@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
+/*   By: lde-ross <lde-ross@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:19:23 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/01 17:56:50 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/01 22:48:27 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	send_msg(int pid, char c)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
-		usleep(100);
+		usleep(600);
 		x = x << 1;
 	}
 }
@@ -41,7 +41,7 @@ void	send_pid(int pid)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
-		usleep(100);
+		usleep(600);
 		i++;
 	}
 	free(binary);
@@ -55,7 +55,8 @@ void	client_handler(int signal)
 	}
 	else
 		ft_printf(BHRED"Something bad happened\n"COLOR_RESET);
-}	
+	exit(0);
+}
 
 int	main(int argc, char *argv[])
 {
@@ -80,5 +81,10 @@ int	main(int argc, char *argv[])
 		send_msg(pid, argv[2][i]);
 		i++;
 	}
-	send_msg(pid, 255);
+	send_msg(pid, -1);
+	while (1)
+	{
+		pause();
+	}
+	
 }

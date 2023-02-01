@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
+/*   By: lde-ross <lde-ross@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:17:34 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/01 17:51:42 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/01 22:36:34 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ int	main(int argc, char *argv[])
 	init_status(&g_status);
 	init_act(&act, &handler);
 	print_pid(getpid());
+	sigaction(SIGUSR2, &act, NULL);
+	sigaction(SIGUSR1, &act, NULL);
 	while (1)
 	{
-		sigaction(SIGUSR2, &act, NULL);
-		sigaction(SIGUSR1, &act, NULL);
 		pause();
 	}
 	return (0);
