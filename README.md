@@ -44,7 +44,7 @@ The server will display its PID (process ID) in the terminal. Take note of this 
 Start the client by running the following command in a separate terminal window:
 
 ```
-./client <SERVER PID> "YOUR MESSAGE HERE"
+./client <SERVER PID> "Your message here ♥"
 ```
 
 The server will display the message sent by the client. The client will receive a confirmation that the message has been successfully sent to the server.
