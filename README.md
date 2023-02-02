@@ -8,7 +8,7 @@ minitalk is a program that allows inter-process communication between a client a
 
 The program has the bonus functionality of confirming the message received by the server and supporting unicode characters.
 
-External functions: [`write`](https://man7.org/linux/man-pages/man2/write.2.html)  [`sigemptyset`](https://man7.org/linux/man-pages/man3/sigemptyset.3.html) [`sigaction`](https://man7.org/linux/man-pages/man2/sigaction.2.html) [`kill`](https://man7.org/linux/man-pages/man2/kill.2.html) [`getpid`](https://man7.org/linux/man-pages/man2/getpid.2.html) [`malloc`](https://man7.org/linux/man-pages/man3/malloc.3.html) [`free`](https://man7.org/linux/man-pages/man1/free.1.html) [`pause`](https://man7.org/linux/man-pages/man2/pause.2.html) [`usleep`](https://man7.org/linux/man-pages/man3/usleep.3.html)
+External functions: [`write`](https://man7.org/linux/man-pages/man2/write.2.html)  [`sigemptyset`](https://man7.org/linux/man-pages/man3/sigemptyset.3.html) [`sigaction`](https://man7.org/linux/man-pages/man2/sigaction.2.html) [`kill`](https://man7.org/linux/man-pages/man2/kill.2.html) [`getpid`](https://man7.org/linux/man-pages/man2/getpid.2.html) [`malloc`](https://man7.org/linux/man-pages/man3/malloc.3.html) [`free`](https://man7.org/linux/man-pages/man1/free.1.html) [`pause`](https://man7.org/linux/man-pages/man2/pause.2.html) [`usleep`](https://man7.org/linux/man-pages/man3/usleep.3.html)[`exit`](https://man7.org/linux/man-pages/man3/exit.3.html)
 
 - [Hot to use](#how-to-use)
 
