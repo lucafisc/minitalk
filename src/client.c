@@ -6,7 +6,7 @@
 /*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:19:23 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/02 16:46:37 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/02 16:53:17 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,5 @@ int	main(int argc, char *argv[])
 	}
 	send_msg(pid, -1);
 	while (1)
-	{
 		pause();
-	}
-	
 }
