@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lde-ross <lde-ross@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:19:23 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/01 22:56:13 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/02 16:46:37 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	send_msg(int pid, char c)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
-		usleep(600);
+		usleep(200);
 		x = x << 1;
 	}
 }
@@ -41,7 +41,7 @@ void	send_pid(int pid)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
-		usleep(600);
+		usleep(200);
 		i++;
 	}
 	free(binary);

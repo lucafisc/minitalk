@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lde-ross <lde-ross@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: lde-ross < lde-ross@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:17:34 by lde-ross          #+#    #+#             */
-/*   Updated: 2023/02/01 22:36:34 by lde-ross         ###   ########.fr       */
+/*   Updated: 2023/02/02 16:36:40 by lde-ross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	get_msg(int signal)
 			init_status(&g_status);
 		}
 		else
-			ft_printf("%c", i);
+			write(1, &i, 1);
 		bit = 0;
 		i = 0;
 	}
