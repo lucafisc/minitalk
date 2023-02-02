@@ -4,6 +4,8 @@
 <img src="https://i.imgur.com/KIzJ2vu.png" alt="drawing" width="120"/>
 </p>
 
+[![lde-ross's 42 minitalk Score](https://badge42.vercel.app/api/v2/clcrkbbp700300fkxp8nykj3n/project/2951327)](https://github.com/JaeSeoKim/badge42)
+
 minitalk is a program that allows inter-process communication between a client and a server. The client sends messages to the server one bit at a time. The server should then receive and reconstruct the original message. It utilizes the use of signals to transfer the data.
 
 The program has the bonus functionality of confirming the message received by the server and supporting unicode characters.
